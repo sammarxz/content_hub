@@ -66,25 +66,6 @@ Agora você pode visitar [`localhost:4000`](http://localhost:4000) do seu navega
 
 ## Desenvolvimento
 
-### Commits
-
-Seguimos o padrão de Commits Convencionais:
-- `feat`: Nova funcionalidade
-- `fix`: Correção de bug
-- `docs`: Alteração em documentação
-- `style`: Formatação, ponto e vírgula faltando, etc
-- `refactor`: Refatoração de código
-- `test`: Adição ou correção de testes
-- `chore`: Atualização de tarefas de build, configurações, etc
-
-### Estrutura de Branches
-
-- `main`: Código em produção
-- `develop`: Branch principal de desenvolvimento
-- `feature/*`: Novas funcionalidades
-- `fix/*`: Correções de bugs
-- `release/*`: Preparação para release
-
 ## Testes
 
 ```bash
