@@ -4,9 +4,23 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
-    <.live_title default="ContentHub" suffix=" · Phoenix Framework">
-      {assigns[:page_title]}
-    </.live_title>
+    <title>ContentHub - Gere links UTM, QR codes e pré-visualização de meta</title>
+    <meta name="description" content="Ferramenta gratuita para gerar e gerenciar links UTM, QR codes e pré-visualizar como sua página aparece nas redes sociais." />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://content-hub.fly.dev/" />
+    <meta property="og:title" content="ContentHub - Gere links UTM, QR codes e pré-visualização de meta" />
+    <meta property="og:description" content="Ferramenta gratuita para gerar e gerenciar links UTM, QR codes e pré-visualizar como sua página aparece nas redes sociais." />
+    <meta property="og:image" content={~p"/images/og-image.png"} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://content-hub.fly.dev/" />
+    <meta property="twitter:title" content="ContentHub - Gere links UTM, QR codes e pré-visualização de meta" />
+    <meta property="twitter:description" content="Ferramenta gratuita para gerar e gerenciar links UTM, QR codes e pré-visualizar como sua página aparece nas redes sociais." />
+    <meta property="twitter:image" content={~p"/images/og-image.png"} />
+
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
