@@ -147,8 +147,8 @@ defmodule ContentHubWeb.CoreComponents do
   def flash_group(assigns) do
     ~H"""
     <div id={@id}>
-      <.flash kind={:info} title={gettext("Success!")} flash={@flash} />
-      <.flash kind={:error} title={gettext("Error!")} flash={@flash} />
+      <.flash kind={:info} title={gettext("Sucesso!")} flash={@flash} />
+      <.flash kind={:error} title={gettext("Erro!")} flash={@flash} />
       <.flash
         id="client-error"
         kind={:error}
@@ -157,7 +157,7 @@ defmodule ContentHubWeb.CoreComponents do
         phx-connected={hide("#client-error")}
         hidden
       >
-        {gettext("Attempting to reconnect")}
+        {gettext("Tentando Reconectar...")}
         <.icon name="hero-arrow-path" class="ml-1 h-3 w-3 animate-spin" />
       </.flash>
 
@@ -169,7 +169,7 @@ defmodule ContentHubWeb.CoreComponents do
         phx-connected={hide("#server-error")}
         hidden
       >
-        {gettext("Hang in there while we get back on track")}
+        {gettext("Aguente firme enquanto voltamos aos trilhos")}
         <.icon name="hero-arrow-path" class="ml-1 h-3 w-3 animate-spin" />
       </.flash>
     </div>
@@ -233,8 +233,8 @@ defmodule ContentHubWeb.CoreComponents do
     <button
       type={@type}
       class={[
-        "phx-submit-loading:opacity-75 rounded-lg py-2 px-3",
-        "text-sm font-semibold leading-6",
+        "phx-submit-loading:opacity-75 h-9 rounded-lg px-4 py-2 w-full sm:w-auto",
+        "text-sm font-semibold leading-6 shadow-sm flex items-center justify-center",
         @variant == "primary" && "bg-zinc-900 hover:bg-zinc-700 text-white active:text-white/80",
         @variant == "outline" && "border border-zinc-300 hover:bg-gray-50 text-zinc-700",
         @class
@@ -381,7 +381,7 @@ defmodule ContentHubWeb.CoreComponents do
         id={@id}
         value={Phoenix.HTML.Form.normalize_value(@type, @value)}
         class={[
-          "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-0 sm:text-sm sm:leading-6",
+          "mt-1 h-9 block shadow-sm w-full rounded-lg text-zinc-900 focus:ring-0 sm:text-sm sm:leading-6",
           @errors == [] && "border-zinc-300 focus:border-zinc-400",
           @errors != [] && "border-rose-400 focus:border-rose-400"
         ]}
@@ -420,28 +420,25 @@ defmodule ContentHubWeb.CoreComponents do
     """
   end
 
-  @spec header(map()) :: Phoenix.LiveView.Rendered.t()
   @doc """
   Renders a header with title.
   """
-  attr :class, :string, default: nil
-
-  slot :inner_block, required: true
-  slot :subtitle
-  slot :actions
+  attr :title, :string, default: "Content Hub"
+  attr :subtitle, :string, default: "Gere links UTM, QR, e pré-visualização de meta."
 
   def header(assigns) do
     ~H"""
-    <header class={[@actions != [] && "flex items-center justify-between gap-6", @class]}>
+    <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
       <div>
-        <h1 class="text-lg font-semibold leading-8 text-zinc-800">
-          {render_slot(@inner_block)}
+        <h1 class="text-5xl font-bold mb-2 flex items-center">
+          <span class="drop-shadow-[0_1px_12px_rgba(255,255,255,0.7)]">
+            {@title}
+          </span>
         </h1>
-        <p :if={@subtitle != []} class="mt-2 text-sm leading-6 text-zinc-600">
-          {render_slot(@subtitle)}
+        <p class="text-md text-gray-400">
+          {@subtitle}
         </p>
       </div>
-      <div class="flex-none">{render_slot(@actions)}</div>
     </header>
     """
   end

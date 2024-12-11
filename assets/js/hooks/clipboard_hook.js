@@ -21,7 +21,6 @@ const ClipboardHook = {
         .then(() => this.pushEvent("copied", {}))
         .catch(err => {
           console.error('Erro ao copiar:', err);
-          // Tenta o fallback antes de mostrar erro
           this.fallbackCopy(text);
         });
     } else {

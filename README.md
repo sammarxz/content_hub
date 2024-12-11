@@ -16,11 +16,11 @@ Facilitar o trabalho de profissionais de marketing e desenvolvedores na criaçã
 - [x] Preview em tempo real dos links gerados
 
 ### Fase 2: Meta Preview
-- [ ] Busca de metadados de URLs (og:title, og:description, og:image)
-- [ ] Preview visual do card social
-- [ ] Cache de metadados
-- [ ] Tratamento de erros de requisição
-- [ ] Loading states
+- [x] Busca de metadados de URLs (og:title, og:description, og:image)
+- [x] Preview visual do card social
+- [x] Cache de metadados
+- [x] Tratamento de erros de requisição
+- [x] Loading states
 
 ### Fase 3: QR Code
 - [ ] Geração de QR code para links
