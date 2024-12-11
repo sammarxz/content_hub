@@ -3,16 +3,9 @@ defmodule ContentHubWeb.QRCodeComponent do
 
   def render(assigns) do
     ~H"""
-    <div class="qr-modal-overlay">
-      <div class="qr-modal-container">
+    <div class="qr-modal-overlay" phx-click="close_qr_modal">
+      <div class="qr-modal-container" phx-click-away="close_qr_modal">
         <div class="qr-modal-content">
-          <div class="qr-modal-header">
-            <h3 class="qr-modal-title">QR abrirá {@value}</h3>
-            <button phx-click="close_qr_modal" class="qr-modal-close" aria-label="Fechar">
-              <.icon name="hero-x-mark" class="w-5 h-5" />
-            </button>
-          </div>
-
           <form phx-target={@myself}>
             <div class="qr-preview">
               {raw(elem(@svg_data, 1))}

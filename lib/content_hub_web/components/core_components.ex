@@ -233,7 +233,7 @@ defmodule ContentHubWeb.CoreComponents do
     <button
       type={@type}
       class={[
-        "phx-submit-loading:opacity-75 h-9 rounded-lg px-4 py-2 w-full sm:w-auto",
+        "phx-submit-loading:opacity-75 h-9 rounded-lg px-4 py-2 w-full",
         "text-sm font-semibold leading-6 shadow-sm flex items-center justify-center",
         @variant == "primary" && "bg-zinc-900 hover:bg-zinc-700 text-white active:text-white/80",
         @variant == "outline" && "border border-input hover:bg-gray-50 text-zinc-700",
@@ -430,7 +430,7 @@ defmodule ContentHubWeb.CoreComponents do
     ~H"""
     <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
       <div>
-        <h1 class="text-5xl font-bold mb-2 flex items-center">
+        <h1 class="text-3xl md:text-5xl font-bold mb-2 flex items-center">
           <span class="drop-shadow-[0_1px_12px_rgba(255,255,255,0.7)]">
             {@title}
           </span>

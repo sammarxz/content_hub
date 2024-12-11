@@ -109,7 +109,7 @@ defmodule ContentHubWeb.UTMBuilderLive do
             </div>
 
             <div class="flex flex-col sm:flex-row justify-between mt-auto pt-4 gap-4">
-              <.button type="button" aria-label="Gerar QR Code do link" phx-click="generate_qr_code">
+              <.button type="button" aria-label="Gerar QR Code do link" phx-click="generate_qr_code" class="sm:w-auto">
                 Gerar QR Code
               </.button>
               <.button
@@ -118,6 +118,7 @@ defmodule ContentHubWeb.UTMBuilderLive do
                 phx-value-url={@form[:url].value}
                 variant="outline"
                 aria-label="Pré-visualizar Link"
+                class="sm:w-auto"
               >
                 Pré-visualizar <span class="text-gray-400 ml-2 hidden sm:inline">↵</span>
               </.button>
@@ -212,6 +213,10 @@ defmodule ContentHubWeb.UTMBuilderLive do
       _ ->
         {:noreply, assign(socket, qr_code_requested: true)}
     end
+  end
+
+  def handle_event("close_qr_modal", _params, socket) do
+    {:noreply, assign(socket, qr_code_requested: false)}
   end
 
   @impl true
