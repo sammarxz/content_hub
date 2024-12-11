@@ -9,12 +9,11 @@ Facilitar o trabalho de profissionais de marketing e desenvolvedores na criaçã
 ## Funcionalidades Planejadas
 
 ### Fase 1: Estrutura Base e UTM Builder
-- [ ] Setup inicial do projeto Phoenix
-- [ ] Configuração do TailwindCSS
-- [ ] Implementação do formulário de UTM
-- [ ] Geração de links UTM
-- [ ] Preview em tempo real dos links gerados
-- [ ] Copiar link para clipboard
+- [x] Setup inicial do projeto Phoenix
+- [x] Implementação do formulário de UTM
+- [x] Geração de links UTM
+- [x] Copiar link para clipboard
+- [x] Preview em tempo real dos links gerados
 
 ### Fase 2: Meta Preview
 - [ ] Busca de metadados de URLs (og:title, og:description, og:image)

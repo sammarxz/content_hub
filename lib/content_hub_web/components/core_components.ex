@@ -219,9 +219,11 @@ defmodule ContentHubWeb.CoreComponents do
 
       <.button>Send!</.button>
       <.button phx-click="go" class="ml-2">Send!</.button>
+      <.button variant="outline">Cancel</.button>
   """
   attr :type, :string, default: nil
   attr :class, :string, default: nil
+  attr :variant, :string, default: "primary", values: ["primary", "outline"]
   attr :rest, :global, include: ~w(disabled form name value)
 
   slot :inner_block, required: true
@@ -231,8 +233,10 @@ defmodule ContentHubWeb.CoreComponents do
     <button
       type={@type}
       class={[
-        "phx-submit-loading:opacity-75 rounded-lg bg-zinc-900 hover:bg-zinc-700 py-2 px-3",
-        "text-sm font-semibold leading-6 text-white active:text-white/80",
+        "phx-submit-loading:opacity-75 rounded-lg py-2 px-3",
+        "text-sm font-semibold leading-6",
+        @variant == "primary" && "bg-zinc-900 hover:bg-zinc-700 text-white active:text-white/80",
+        @variant == "outline" && "border border-zinc-300 hover:bg-gray-50 text-zinc-700",
         @class
       ]}
       {@rest}
@@ -416,6 +420,7 @@ defmodule ContentHubWeb.CoreComponents do
     """
   end
 
+  @spec header(map()) :: Phoenix.LiveView.Rendered.t()
   @doc """
   Renders a header with title.
   """
