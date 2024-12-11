@@ -1,5 +1,7 @@
 # ContentHub
 
+![Content Hub Preview](https://raw.githubusercontent.com/sammarxz/content_hub/refs/heads/main/priv/static/images/og-image.png)
+
 ContentHub é uma aplicação web construída com Phoenix LiveView para geração e gerenciamento de links UTM, QR codes e pré-visualização de meta tags.
 
 ## Visão do Projeto
