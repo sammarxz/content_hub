@@ -236,7 +236,7 @@ defmodule ContentHubWeb.CoreComponents do
         "phx-submit-loading:opacity-75 h-9 rounded-lg px-4 py-2 w-full sm:w-auto",
         "text-sm font-semibold leading-6 shadow-sm flex items-center justify-center",
         @variant == "primary" && "bg-zinc-900 hover:bg-zinc-700 text-white active:text-white/80",
-        @variant == "outline" && "border border-zinc-300 hover:bg-gray-50 text-zinc-700",
+        @variant == "outline" && "border border-input hover:bg-gray-50 text-zinc-700",
         @class
       ]}
       {@rest}

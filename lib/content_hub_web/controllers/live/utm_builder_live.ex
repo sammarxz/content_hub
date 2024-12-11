@@ -24,7 +24,8 @@ defmodule ContentHubWeb.UTMBuilderLive do
        utm_link: nil,
        metadata: nil,
        loading_metadata: true,
-       error_metadata: nil
+       error_metadata: nil,
+       qr_code_requested: false
      )}
   end
 
@@ -43,7 +44,14 @@ defmodule ContentHubWeb.UTMBuilderLive do
             <div class="space-y-4">
               <div>
                 <.label>Adicione a URL *</.label>
-                <.input type="text" field={@form[:url]} placeholder="exemplo.com" class="w-full" />
+                <.input
+                  type="text"
+                  field={@form[:url]}
+                  placeholder="exemplo.com"
+                  phx-keyup="handle_url_keyup"
+                  phx-key="Enter"
+                  class="w-full"
+                />
               </div>
 
               <div class="grid grid-cols-2 gap-4">
@@ -92,6 +100,7 @@ defmodule ContentHubWeb.UTMBuilderLive do
                     phx-hook="ClipboardHook"
                     class="h-9 w-9 bg-white shadow-sm border border-gray-300 rounded-md hover:bg-gray-50"
                     disabled={is_nil(@utm_link)}
+                    aria-label="Copiar link UTM"
                   >
                     <.icon name="hero-clipboard" class="h-5 w-5" />
                   </button>
@@ -100,12 +109,15 @@ defmodule ContentHubWeb.UTMBuilderLive do
             </div>
 
             <div class="flex flex-col sm:flex-row justify-between mt-auto pt-4 gap-4">
-              <.button type="submit">Gerar QR Code</.button>
+              <.button type="button" aria-label="Gerar QR Code do link" phx-click="generate_qr_code">
+                Gerar QR Code
+              </.button>
               <.button
                 type="button"
                 phx-click="preview"
                 phx-value-url={@form[:url].value}
                 variant="outline"
+                aria-label="Pré-visualizar Link"
               >
                 Pré-visualizar <span class="text-gray-400 ml-2 hidden sm:inline">↵</span>
               </.button>
@@ -148,8 +160,22 @@ defmodule ContentHubWeb.UTMBuilderLive do
         </div>
       </div>
     </div>
+    <div :if={@qr_code_requested} class="flex justify-center mt-4">
+      <.live_component module={ContentHubWeb.QRCodeComponent} id="qr-code" value={@utm_link} />
+    </div>
     """
   end
+
+  def handle_event("handle_url_keyup", %{"key" => "Enter", "value" => url}, socket) do
+    if String.trim(url) != "" and url != socket.assigns[:last_preview_url] do
+      Process.send_after(self(), {:fetch_metadata, url}, @debounce_ms)
+      {:noreply, assign(socket, loading_metadata: true, last_preview_url: url)}
+    else
+      {:noreply, socket}
+    end
+  end
+
+  def handle_event("handle_url_keyup", _params, socket), do: {:noreply, socket}
 
   def handle_event("validate", params, socket) do
     form = to_form(params)
@@ -158,9 +184,9 @@ defmodule ContentHubWeb.UTMBuilderLive do
   end
 
   def handle_event("preview", %{"url" => url}, socket) do
-    if String.trim(url) != "" do
+    if String.trim(url) != "" and url != socket.assigns[:last_preview_url] do
       Process.send_after(self(), {:fetch_metadata, url}, @debounce_ms)
-      {:noreply, assign(socket, loading_metadata: true)}
+      {:noreply, assign(socket, loading_metadata: true, last_preview_url: url)}
     else
       {:noreply, socket}
     end
@@ -174,6 +200,18 @@ defmodule ContentHubWeb.UTMBuilderLive do
   @impl true
   def handle_event("error", %{"message" => message}, socket) do
     {:noreply, put_flash(socket, :error, message)}
+  end
+
+  @impl true
+  def handle_event("generate_qr_code", _params, socket) do
+    case socket.assigns.utm_link do
+      nil ->
+        {:noreply,
+         put_flash(socket, :error, "Por favor, preencha a URL antes de gerar o QR Code.")}
+
+      _ ->
+        {:noreply, assign(socket, qr_code_requested: true)}
+    end
   end
 
   @impl true

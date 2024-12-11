@@ -23,10 +23,9 @@ Facilitar o trabalho de profissionais de marketing e desenvolvedores na criaçã
 - [x] Loading states
 
 ### Fase 3: QR Code
-- [ ] Geração de QR code para links
-- [ ] Customização de QR code (cores, tamanho)
-- [ ] Download do QR code
-- [ ] Preview em tempo real
+- [x] Geração de QR code para links
+- [x] Download do QR code
+- [x] Preview em tempo real
 
 ### Fase 4: Histórico e Analytics
 - [ ] Salvar histórico de links no localStorage
